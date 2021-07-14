@@ -1,0 +1,52 @@
+# ~/.bash_env contains user defined environment variables and other exports,
+# if the file exists, it is included in ~/.bashrc
+# Since these variables could be used in the ~/.bashrc, this statement is placed
+# before any other instruction.
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+
+# To avoid duplicate lines in bash History
+HISTCONTROL=ignoreboth
+
+# History size
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+PROMPT=[%*] %n@%M:%~$ 
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# ~/.bash_aliases is supposed to contain other aliases
+# in order for the user to not edid ~/.bashrc.
+# The following statement checks if this file exists,
+# in which case, it is included in the ~./bashrc
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+eval clear
+eval neofetch
