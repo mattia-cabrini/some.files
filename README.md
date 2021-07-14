@@ -48,7 +48,7 @@ Awesome Windows Manager configuration includes the self-launch of Konsole, Nitro
 
 This configuration relies on the following packets:
 
-* [VIm](ihttps://www.vim.org/);
+* [VIm](https://www.vim.org/);
 * [Alacritty](https://github.com/alacritty/alacritty);
 * [Dmenu](http://git.suckless.org/dmenu/);
 * [Compton](https://github.com/chjj/compton);
