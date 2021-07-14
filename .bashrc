@@ -1,32 +1,17 @@
-# PS1="[\u@\h:\W]$ "
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# ~/.bash_env contains user defined environment variables and other exports,
+# if the file exists, it is included in ~/.bashrc
+# Since these variables could be used in the ~/.bashrc, this statement is placed
+# before any other instruction.
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
+# To avoid duplicate lines in bash History
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# History size
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /opt/bin/lesspipe ] && eval "$(SHELL=/system/bin/sh lesspipe)"
 
 # Using color promt
 # if [[ ${EUID} == 0 ]] ; then
@@ -35,14 +20,7 @@ shopt -s checkwinsize
 #     PS1='\[\033[48;2;105;121;16;38;2;255;255;255m\] \$ \[\033[48;2;0;135;175;38;2;105;121;16m\]\[\033[48;2;0;135;175;38;2;255;255;255m\] \u@\h \[\033[48;2;83;85;85;38;2;0;135;175m\]\[\033[48;2;83;85;85;38;2;255;255;255m\] \w \[\033[49;38;2;83;85;85m\]\[\033[00m\] '
 # fi
 
-# export PS1="$?? \u@\h:\w \$ "
 export PS1="\[\033[m\][\[\033[1;35m\]\t\[\033[m\]] \[\e[2m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\W\[\e[0m\]\[\e[2m\]\$ \[\e[0m\]"
-
-# Some better definitions
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias more=less
 
 #
 # # ex - archive extractor
@@ -69,37 +47,13 @@ ex ()
   fi
 }
 
-# enable color support of ls and also add handy aliases
-if [ -x /opt/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
+# ~/.bash_aliases is supposed to contain other aliases
+# in order for the user to not edid ~/.bashrc.
+# The following statement checks if this file exists,
+# in which case, it is included in the ~./bashrc
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /opt/etc/bash_completion ] && ! shopt -oq posix; then
-    . /opt/etc/bash_completion
-fi
-
-export PATH="$PATH:/opt/GoLand-2021.1.1/bin"
+eval clear
+eval neofetch
