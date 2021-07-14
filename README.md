@@ -39,4 +39,17 @@ The prompt (PS1 for bash and PROMPT for zsh) is different.
 The following packets are required:
 
 * [neofetch](https://github.com/dylanaraps/neofetch): if you don't like `neofetch` or simply you don't want to run it at shell start, comment the line `eval neofetch` in the `.*shrc` file.
- 
+
+## Awesome
+
+Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Konsole, as the default console.
+
+### Dependencies
+
+This configuration relies on the following packets:
+
+* [VIm](ihttps://www.vim.org/);
+* [Konsole](https://konsole.kde.org/);
+* [Dmenu](http://git.suckless.org/dmenu/);
+* [Compton](https://github.com/chjj/compton);
+* [Nitrogen](https://github.com/l3ib/nitrogen/);
