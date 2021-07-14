@@ -48,7 +48,7 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "konsole"
+terminal = "alacrity"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -568,4 +568,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- CUSTOM
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("nitrogen --restore")
-awful.spawn.with_shell("konsole")
+awful.spawn.with_shell("alacritty")

@@ -42,14 +42,14 @@ The following packets are required:
 
 ## Awesome
 
-Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Konsole, as the default console.
+Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Alaccrity, as the default console.
 
 ### Dependencies
 
 This configuration relies on the following packets:
 
 * [VIm](ihttps://www.vim.org/);
-* [Konsole](https://konsole.kde.org/);
+* [Alacritty](https://github.com/alacritty/alacritty);
 * [Dmenu](http://git.suckless.org/dmenu/);
 * [Compton](https://github.com/chjj/compton);
 * [Nitrogen](https://github.com/l3ib/nitrogen/);
