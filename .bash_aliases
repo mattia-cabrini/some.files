@@ -1,4 +1,3 @@
-# Common aliases
 alias cp="cp -i"
 alias df='df -h'
 alias free='free -m'
