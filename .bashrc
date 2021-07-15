@@ -47,6 +47,32 @@ ex ()
   fi
 }
 
+uniq2()
+{
+	while read row
+	do
+		L=${#v[@]}
+		
+		i=0
+		f=0
+		while [ $i -lt $L ]
+		do
+			if [ "$row" == ${v[$i]} ]
+			then
+				f=1
+			fi
+			
+			let i=$i+1
+		done
+		
+		if [ $f -eq 0 ]
+		then
+			echo $row
+			v[$L]=$row
+		fi		
+	done
+}
+
 # ~/.bash_aliases is supposed to contain other aliases
 # in order for the user to not edid ~/.bashrc.
 # The following statement checks if this file exists,
@@ -54,6 +80,55 @@ ex ()
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# CD
+push_up()
+{
+	up_history[${#up_history[@]}]=$(pwd)
+
+	lines=$(up | sort -k 1 -t " " -n -r | cut -d " " -f 2-50 | uniq2)
+	i=$(up | sort -k 1 -t " " -n -r | cut -d " " -f 2-50 | uniq2 | wc -l | tr " \t\n" "\0\0\0")	
+
+	unset up_history
+
+	for row in $lines
+	do
+		let i=$i-1
+		up_history[$i]=$row
+		echo $row
+	done
+}
+
+pop_up()
+{
+	let L=${#up_history[@]}-1
+	POP_UP=${up_history[$L]}
+}
+
+up()
+{
+	let L=${#up_history[@]}
+	i=0
+	
+	if [ -z $1 ]	
+	then
+		while [ $i -lt $L ]
+		do
+			echo $i ${up_history[$i]}
+			let i=$i+1
+		done
+	else
+		cd ${up_history[$1]}
+	fi
+}
+
+eval push_up
+eval push_up
+
+alias ::="pop_up && push_up && cd \$POP_UP"
+alias ..="push_up && cd .."
+alias ...="push_up && cd ../.."
+alias cd="push_up && cd"
 
 eval clear
 eval neofetch
