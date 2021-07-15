@@ -34,6 +34,74 @@ The `.*shrc` file is instructed to include the following files:
 
 The prompt (PS1 for bash and PROMPT for zsh) is different.
 
+### Aliases
+
+In `.*sh_aliases`, both for bash and zsh, the following aliases are defined:
+
+> Only the main ones are reported, see `.*sh_aliases` for the complete list.
+
+Alias|Command|Description
+:-:|:-|:-
+`cp`|`cp -i`|To prevent file override
+`more`|`less`|To not use `more`
+`ls`|`ls --group-directories-first`|Self explanatory: it groups directories before files
+`la`|`ls --group-directories-first -a`|Like the previous, but shows also hidden files
+`git.s`|`git status`|To use only if you know [git](https://git-scm.com/)
+`git.p`|`git push`|To use only if you know [git](https://git-scm.com/)
+`git.c`|`git commit`|To use only if you know [git](https://git-scm.com/)
+`git.m`|`git commit -m`|To use only if you know [git](https://git-scm.com/)
+
+### Directories
+
+For both bash and zsh, a few aliases has been defined for the `cd` command. Here an example of what you can do:
+
+```sh
+# Move to parent directory, cd ..
+..
+
+# Move to parent directory, twice, cd ../..
+...
+
+# Move to the previous directory
+::
+
+# Move to a generic directory
+cd path/to/dir
+```
+
+#### Bash Experimental
+
+For bash, and only bash, I added a functionality to be able to track all the directory visited during a session. The list is shown by
+
+```sh
+# Show the list of directory visited during the session
+up
+```
+
+**Example**:
+
+```sh
+$ cd apache2
+$ cd extra
+$ ..
+$ up
+0 /etc
+1 /etc/apache2
+2 /etc/apache2/extra
+$ 
+```
+
+By running `up n`, the user changes directory moving to the entry #n of the list:
+
+**Example**, given the previous list:
+
+```sh
+# Move to /etc
+$ up 0
+```
+
+**WARNING**: this functionality is experimental.
+
 ### Dependencies
 
 The following packets are required:
@@ -42,7 +110,7 @@ The following packets are required:
 
 ## Awesome
 
-Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Alaccrity, as the default console.
+Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Alacritty, as the default console.
 
 ### Dependencies
 

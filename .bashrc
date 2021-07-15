@@ -95,7 +95,9 @@ push_up()
 	do
 		let i=$i-1
 		up_history[$i]=$row
-		echo $row
+		
+		# Debug:
+		# echo $row
 	done
 }
 
