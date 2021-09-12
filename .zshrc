@@ -1,7 +1,6 @@
-# ~/.zsh_env contains user defined environment variables and other exports,
-# if the file exists, it is included in ~/.zshrc
-# Since these variables could be used in the ~/.zshrc, this statement is placed
-# before any other instruction.
+# ZSHRC
+
+# Enviroment variables
 if [ -f ~/.zsh_env ]; then
     . ~/.zsh_env
 fi
@@ -40,13 +39,11 @@ ex ()
   fi
 }
 
-# ~/.zsh_aliases is supposed to contain other aliases
-# in order for the user to not edid ~/.zshrc.
-# The following statement checks if this file exists,
-# in which case, it is included in the ~./bashrc
+# User defined aliases
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# Eval neofetch, I like it
 eval clear
 eval neofetch
