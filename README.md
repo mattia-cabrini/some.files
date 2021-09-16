@@ -58,15 +58,6 @@ For both bash and zsh, a few aliases has been defined for the `cd` command. Here
 ```sh
 # Move to parent directory, cd ..
 ..
-
-# Move to parent directory, twice, cd ../..
-...
-
-# Move to the previous directory
-::
-
-# Move to a generic directory
-cd path/to/dir
 ```
 
 #### Bash Experimental
@@ -107,17 +98,3 @@ $ up 0
 The following packets are required:
 
 * [neofetch](https://github.com/dylanaraps/neofetch): if you don't like `neofetch` or simply you don't want to run it at shell start, comment the line `eval neofetch` in the `.*shrc` file.
-
-## Awesome
-
-Awesome Windows Manager configuration includes the self-launch of Konsole, Nitrogen (for background) and Compton. It is also configures Dmenu as launcher. VIm has been configured as the default editor, Alacritty, as the default console.
-
-### Dependencies
-
-This configuration relies on the following packets:
-
-* [VIm](https://www.vim.org/);
-* [Alacritty](https://github.com/alacritty/alacritty);
-* [Dmenu](http://git.suckless.org/dmenu/);
-* [Compton](https://github.com/chjj/compton);
-* [Nitrogen](https://github.com/l3ib/nitrogen/);
