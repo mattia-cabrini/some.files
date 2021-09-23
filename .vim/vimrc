@@ -3,3 +3,4 @@ syntax enable
 colorscheme dracula
 set t_Co=256
 set nu
+set tabstop=4
