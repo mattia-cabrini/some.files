@@ -1,0 +1,57 @@
+# PERSONAL
+
+IMAPAccount personal
+Host imaps.aruba.it
+Port 993
+User me@mattiacabrini.com
+# Pass ***
+PassCmd "gpg --decrypt ~/.passwords/me@mattiacabrini.com.gpg 2> /dev/null"
+SSLType IMAPS
+# CertificateFile /path/to/file
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+SubFolders Verbatim
+PATH ~/.mail/personal/
+Inbox ~./mail/personal/Inbox/
+
+Channel personal
+Far :personal-remote:
+Near :personal-local:
+Create Both
+Expunge Both
+SyncState *
+Patterns *
+CopyArrivalDate yes
+Sync All
+
+# DEV
+
+IMAPAccount dev
+Host imaps.aruba.it
+Port 993
+User dev@mattiacabrini.com
+# Pass ***
+PassCmd "gpg --decrypt ~/.passwords/dev@mattiacabrini.com.gpg 2> /dev/null"
+SSLType IMAPS
+# CertificateFile /path/to/file
+
+IMAPStore dev-remote
+Account dev
+
+MaildirStore dev-local
+SubFolders Verbatim
+PATH ~/.mail/dev/
+Inbox ~./mail/dev/Inbox/
+
+Channel dev
+Far :dev-remote:
+Near :dev-local:
+Create Both
+Expunge Both
+SyncState *
+Patterns *
+CopyArrivalDate yes
+Sync All
