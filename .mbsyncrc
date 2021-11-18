@@ -15,7 +15,7 @@ Account personal
 MaildirStore personal-local
 SubFolders Verbatim
 PATH ~/.mail/personal/
-Inbox ~./mail/personal/Inbox/
+Inbox ~/.mail/personal/Inbox/
 
 Channel personal
 Far :personal-remote:
@@ -44,7 +44,7 @@ Account dev
 MaildirStore dev-local
 SubFolders Verbatim
 PATH ~/.mail/dev/
-Inbox ~./mail/dev/Inbox/
+Inbox ~/.mail/dev/Inbox/
 
 Channel dev
 Far :dev-remote:
