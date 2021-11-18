@@ -60,39 +60,6 @@ For both bash and zsh, a few aliases has been defined for the `cd` command. Here
 ..
 ```
 
-#### Bash Experimental
-
-For bash, and only bash, I added a functionality to be able to track all the directory visited during a session. The list is shown by
-
-```sh
-# Show the list of directory visited during the session
-up
-```
-
-**Example**:
-
-```sh
-$ cd apache2
-$ cd extra
-$ ..
-$ up
-0 /etc
-1 /etc/apache2
-2 /etc/apache2/extra
-$ 
-```
-
-By running `up n`, the user changes directory moving to the entry #n of the list:
-
-**Example**, given the previous list:
-
-```sh
-# Move to /etc
-$ up 0
-```
-
-**WARNING**: this functionality is experimental.
-
 ### Dependencies
 
 The following packets are required:

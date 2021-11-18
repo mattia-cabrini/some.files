@@ -1,0 +1,57 @@
+#+TITLE: Password Management
+
+* Managing Keys
+GPG Keys are necessay to encrypt ypur passwords. Without encryption, password would be easily exposed to other people.
+
+** How to generate a key
+#+BEGIN_SRC
+gpg --full-generate-key
+#+END_SRC
+
+** How to show existin keys on the system
+*WARNING*:
+Do not show the output of the following command to anybody.
+
+#+BEGIN_SRC
+gpg --list-secret-keys
+#+END_SRC
+
+** Passwords and encryption
+Let's start with creating a file for each password. In the following example, a file foreach email account:
+
+#+BEGIN_SRC
+me@mattiacabrini.com
+dev@mattiacabrini.com
+#+END_SRC
+
+These *temporarily* files will contain the plain text password that we are going to encrypt.
+
+To encrypt the password, run the following:
+#+BEGIN_SRC
+gpg --sign me@mattiacabrini.com.gpg
+spg --sign dev@mattiacabrini.com.gpg
+#+END_SRC
+
+To decrypt the passwords:
+#+BEGIN_SRC
+gpg --decrypt me@mattiacabrini.com.gpg
+#+END_SRC
+or:
+#+BEGIN_SRC
+gpg --decrypt dev@mattiacabrini.com.gpg
+#+END_SRC
+
+If the passwords you get are correct, then everything had worked correctly and now you can delete the plain text files.
+
+#+BEGIN_SRC
+rm me@mattiacabrini.com
+rm dev@mattiacabrini.com
+#+END_SRC
+
+As you might have noticed, the decryption command returns more row than expected; Not only the password but also some gpg informations. To avoid additional data:
+
+#+BEGIN_SRC
+gpg --decrypt me@mattiacabrini.com 2> /dev/null
+#+END_SRC
+
+You can youse this last command in yout mbsync configuration.
