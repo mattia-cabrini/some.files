@@ -15,4 +15,6 @@ alias :q="exit"
 alias hh="homebank"
 alias spellen="aspell -l en check"
 alias spellit="aspell -l it check"
+alias mutt.me="~/.config/neomutt/mutt.me"
+alias mutt.dev="~/.config/neomutt/mutt.dev"
 
