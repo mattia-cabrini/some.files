@@ -6,6 +6,11 @@ cd ~/.config/neomutt
 if [ $# -eq 1 ]; then
     if [ -f "./users/$1.rc" ]; then
         echo "source ./users/$1.rc" > ./neomuttrc
+
+        if [ -f "./mailboxes/$1-mb.rc" ]; then
+            echo "source ./mailboxes/$1-mb.rc" >> ./neomuttrc
+        fi
+
         echo "source ./fixed.rc" >> ./neomuttrc
     else
         echo "User configuration file not found."
