@@ -1,6 +1,6 @@
-# PERSONAL
+# ME
 
-IMAPAccount personal
+IMAPAccount me
 Host imaps.example.com
 Port 993
 User user@example.com
@@ -9,17 +9,17 @@ PassCmd "gpg --decrypt ~/.passwords/user@example.com.gpg 2> /dev/null"
 SSLType IMAPS
 # CertificateFile /path/to/file
 
-IMAPStore personal-remote
-Account personal
+IMAPStore me-remote
+Account me
 
-MaildirStore personal-local
+MaildirStore me-local
 SubFolders Verbatim
-PATH ~/.mail/personal/
-Inbox ~/.mail/personal/Inbox/
+PATH ~/.mail/me/
+Inbox ~/.mail/me/Inbox/
 
-Channel personal
-Far :personal-remote:
-Near :personal-local:
+Channel me
+Far :me-remote:
+Near :me-local:
 Create Both
 Expunge Both
 SyncState *

@@ -1,0 +1,12 @@
+set folder = "~/.mail/user"
+set smtp_url = "smtps://user@example.com@smtps.example.com:465"
+set from = "user@example.com"
+set smtp_pass = "`gpg --decrypt ~/.passwords/user@example.com.gpg 2> /dev/null`"
+set realname = "John Doe"
+
+mailboxes =Inbox =Sent =Drafts =Trash =Archivio 
+
+set spoolfile = "+Inbox"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
