@@ -1,11 +1,11 @@
 # PERSONAL
 
 IMAPAccount personal
-Host imaps.aruba.it
+Host imaps.example.com
 Port 993
-User me@mattiacabrini.com
+User user@example.com
 # Pass ***
-PassCmd "gpg --decrypt ~/.passwords/me@mattiacabrini.com.gpg 2> /dev/null"
+PassCmd "gpg --decrypt ~/.passwords/user@example.com.gpg 2> /dev/null"
 SSLType IMAPS
 # CertificateFile /path/to/file
 
@@ -30,11 +30,11 @@ Sync All
 # DEV
 
 IMAPAccount dev
-Host imaps.aruba.it
+Host imaps.example.com
 Port 993
-User dev@mattiacabrini.com
+User other.user@example.com
 # Pass ***
-PassCmd "gpg --decrypt ~/.passwords/dev@mattiacabrini.com.gpg 2> /dev/null"
+PassCmd "gpg --decrypt ~/.passwords/other.user@example.com.gpg 2> /dev/null"
 SSLType IMAPS
 # CertificateFile /path/to/file
 

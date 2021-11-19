@@ -1,6 +1,18 @@
+# Packages
 packadd! dracula
+
+#
 syntax enable
+
+# I like this one
 colorscheme dracula
+
+# Needed to use VIm in TMUX over SSH on non GNU-Linux clients.
+# You might won't need this line.
 set t_Co=256
+
+# To display line numbers
 set nu
+
+# 4-spaces tabulation
 set tabstop=4

@@ -1,0 +1,8 @@
+#+TITLE:  VIm Configuration
+Really a simple one.
+
+** Not Much to Say
+Please refer to the comments in the rc file.
+
+** Dependencies
+This configuration depends on the [[https://draculatheme.com/][Dracula Theme]].

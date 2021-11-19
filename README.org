@@ -1,0 +1,72 @@
+#+TITLE: Some Dot Files
+Here I collect some of my personal .files.
+
+* Folders
+- .doom.d is the configuration folder for [[https://github.com/hlissner/doom-emacs][Doom Emacs]].
+- .vim is the configuration folder for [[https://www.vim.org/][VIm]].
+- .config/i3 is the configuration folder for [[https://i3wm.org/][i3wm]], the window manager I use on GNU-Linux.
+- .config/neomutt is the configuration folder for [[https://neomutt.org/guide/configuration.html][neomutt]], the email client I use on GNU-Linux.
+
+* In this folder
+In this folder you'll be able to find the configuration .files for:
+- The shells:
+  - [[https://www.gnu.org/software/bash/][BASH]];
+  - [[https://zsh.sourceforge.io/][ZSH]].
+- The [[https://isync.sourceforge.io/mbsync.html][mbsync]] IMAP synchronizer;
+
+* Shells
+#+BEGIN_QUOTE
+Since shell configurations are very similar, I will not refer to ~.bashrc~, ~.zsh_env~ or so, but to ~.*shrc~ or ~.*sh_aliases~ or so.
+#+END_QUOTE
+
+** Extractor
+Both of them defines an extractor function ~ex()~ which is useful to extract different kind of archives. This function relies on the following commands:
+
+-  [[https://www.gnu.org/savannah-checkouts/gnu/tar/manual/tar.html][tar]];
+-  [[https://gitlab.com/bzip2/bzip2/][bunzip2]];
+-  [[https://www.win-rar.com/][unrar]];
+-  [[https://www.gnu.org/software/gzip/][gunzip]];
+-  [[http://www.info-zip.org/UnZip.html][unzip]];
+-  [[https://pubs.opengroup.org/onlinepubs/9699919799/utilities/uncompress.html#][uncompress]];
+-  [[https://www.7-zip.org/][7z]].
+
+Not all of these commands have to be installed on your system. You may install only the ones you need without changing the ~.*shrc~ file.
+
+The ~.*shrc~ file is instructed to include the following files:
+
+- ~\~/.*sh_aliases~: a file in which the user can insert additional aliases without changing the ~.*shrc~ file;
+- ~\~/.*sh_env~: a file in which the user is supposed to insert the environment variables or exports without changing the ~.*shrc~ file. Since every system is different, the file is not included in the repository.
+
+Additional note: the prompt (PS1 for bash and PROMPT for zsh) is different.
+
+** Aliases
+
+In ~.*sh_aliases~, both for bash and zsh, the following aliases are defined:
+
+#+BEGIN_SRC
+Only the main ones are reported, see ~.*sh_aliases~ for the complete list.
+#+END_SRC
+
+| Shell | Alias   | Command                           | Description                                               |
+|-------+---------+-----------------------------------+-----------------------------------------------------------|
+| Both  | ~cp~    | ~cp -i~                           | To prevent file override                                  |
+| Both  | ~more~  | ~less~                            | To not use ~more~                                         |
+| Bash  | ~ls~    | ~ls --group-directories-first~    | Self explanatory: it groups directories before files      |
+| Bash  | ~la~    | ~ls --group-directories-first -a~ | Like the previous, but shows also hidden files            |
+| Both  | ~git.s~ | ~git status~                      | To use only if you know [[https://git-scm.com/][git]]                               |
+| Both  | ~git.p~ | ~git push~                        | To use only if you know [[https://git-scm.com/][git]]                               |
+| Both  | ~git.c~ | ~git commit~                      | To use only if you know [[https://git-scm.com/][git]]                               |
+| Both  | ~git.m~ | ~git commit -m~                   | To use only if you know [[https://git-scm.com/][git]]                               |
+| Both  | ~:q~    | ~exit~                            | To exit typing ~:q~ like the VIm addicted user would do   |
+| Both  | ~..~    | ~cd ..~                           | To cd to the parent directory just with a double dot ~..~ |
+
+** Dependencies
+- [[https://github.com/dylanaraps/neofetch][neofetch]]: For no particular reason I like to display the output of neofetch command when I start the shell. You can disable this behavior by remove the lines
+  #+BEGIN_SRC
+  eval clear
+  eval neofetch
+  #+END_SRC
+  in the ~.*shrc~ file(s).
+
+* mbsync (isync)
+The ~.mbsyncrc~ file contains my [[./mbsync.org][IMAP configuration]]. You can use this file to make your own configuration of ~mbsync~. At the time I'm writing <2021-11-19 Fri> I haven't published the mbsync configuration guide, yet. I'll do it soon.

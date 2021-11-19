@@ -20,38 +20,38 @@ gpg --list-secret-keys
 Let's start with creating a file for each password. In the following example, a file foreach email account:
 
 #+BEGIN_SRC
-me@mattiacabrini.com
-dev@mattiacabrini.com
+user@example.com
+other.user@example.com
 #+END_SRC
 
 These *temporarily* files will contain the plain text password that we are going to encrypt.
 
 To encrypt the password, run the following:
 #+BEGIN_SRC
-gpg --sign me@mattiacabrini.com.gpg
-spg --sign dev@mattiacabrini.com.gpg
+gpg --sign user@example.com.gpg
+spg --sign other.user@example.com.gpg
 #+END_SRC
 
 To decrypt the passwords:
 #+BEGIN_SRC
-gpg --decrypt me@mattiacabrini.com.gpg
+gpg --decrypt user@example.com.gpg
 #+END_SRC
 or:
 #+BEGIN_SRC
-gpg --decrypt dev@mattiacabrini.com.gpg
+gpg --decrypt other.user@example.com.gpg
 #+END_SRC
 
 If the passwords you get are correct, then everything had worked correctly and now you can delete the plain text files.
 
 #+BEGIN_SRC
-rm me@mattiacabrini.com
-rm dev@mattiacabrini.com
+rm user@example.com
+rm other.user@example.com
 #+END_SRC
 
 As you might have noticed, the decryption command returns more row than expected; Not only the password but also some gpg informations. To avoid additional data:
 
 #+BEGIN_SRC
-gpg --decrypt me@mattiacabrini.com 2> /dev/null
+gpg --decrypt user@example.com 2> /dev/null
 #+END_SRC
 
 You can youse this last command in yout mbsync configuration.
