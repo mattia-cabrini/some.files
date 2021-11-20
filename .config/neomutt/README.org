@@ -79,11 +79,11 @@ Pay attention to the ~smtp_pass~ variable:
 - Clear Text Password:
   #+BEGIN_SRC
   smtp_pass = "hey, this is a clear text!"
-  #+BEGIN_SRC
+  #+END_SRC
 - Password Command:
   #+BEGIN_SRC
   smtp_pass = "`hey, this is a weird kind of command!`"
-  #+BEGIN_SRC
+  #+END_SRC
 
 ** Sourced Configuration
 The configuration on neomutt is stored in ~\~/.config/neomutt/neomuttrc~. However, if the configuration is too long for a single file, the neomuttrc can include external configuration snippets.
