@@ -69,4 +69,4 @@ Only the main ones are reported, see ~.*sh_aliases~ for the complete list.
   in the ~.*shrc~ file(s).
 
 * mbsync (isync)
-The ~.mbsyncrc~ file contains my [[./mbsync.org][IMAP configuration]]. You can use this file to make your own configuration of ~mbsync~. At the time I'm writing <2021-11-19 Fri> I haven't published the mbsync configuration guide, yet. I'll do it soon.
+The ~.mbsyncrc~ file contains my [[./mbsync.org][IMAP configuration]]. You can use this file to make your own configuration of ~mbsync~.

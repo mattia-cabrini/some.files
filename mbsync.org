@@ -1,3 +1,83 @@
 #+TITLE: Mbsync Configuration Explained
 
-I'll write this soon.
+* Disclaimer
+This *is not* the complate ultimate guide to mbsync (iSync) configuration. This file is intended to provide an explaination of my configuration. It doesn't cover all mbsync features, but you can use it to make your first configuration and then refer to the [[https://isync.sourceforge.io/mbsync.html][official documentation]] if you need something more sophisticated. I hope you find it useful.
+
+* IMAP Configuration
+** Account
+The first step is to define an IMAP account. An IMAP account consists of an arbitrary name, a user name (usually the email address itself), a password, a host and a port. The password could be furnished either in clear text or as a command. Defining a command instead of a clear text is useful if you'd like to encrypt the password.
+
+You can specify the SSLType to tell mbsync that the server requires SSL; in which case you can also select a certificate file.
+
+#+BEGIN_SRC
+IMAPAccount <account name>
+Host <IMAP host>
+Port <IMAP port>
+User <user>
+# Pass <clear text password>
+PassCmd <password command>
+SSLType IMAPS
+# CertificateFile /path/to/file
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC
+IMAPAccount me
+Host imaps.example.com
+Port 993
+User user@example.com
+# Pass ***
+PassCmd "gpg --decrypt ~/.passwords/user@example.com.gpg 2> /dev/null"
+SSLType IMAPS
+# CertificateFile /path/to/file
+#+END_SRC
+#+END_EXAMPLE
+
+** Stores
+The second step is to define the stores. A store is a data container that could be either local or remote. We are going to use the IMAP server as the remote store and a local folder as a store. I mean... obviously.
+
+*** The Remote Store
+#+BEGIN_SRC
+# The name is again completely arbitrary
+IMAPStore me-remote
+# The account is the one defined before
+Account me
+#+END_SRC
+
+*** The Local Store
+#+BEGIN_SRC
+# The arbitrary name
+MaildirStore me-local
+SubFolders Verbatim
+
+# The local folder
+PATH ~/.mail/me/
+# The Inbox folder
+Inbox ~/.mail/me/Inbox/
+#+END_SRC
+
+Be aware that mbsync does not create any folder: you must create them before executing ~mbsync~. Be also aware that you *must* add the final ~/~.
+
+** Channels
+The third and last step is to define a channel. The channel defines an association between a local and a remote store. It could be used to syncronize only a subset of the account mailboxes. Furthermore, the same account could be referred to in different channels. This is not the case; my configuration is made up so that the whole IMAP account is dumped into the local store.
+
+#+BEGIN_SRC
+# The arbitrary name
+Channel me
+
+# The local (=Near=) and remote (=Far=) store you just configured
+Far :me-remote:
+Near :me-local:
+
+# In case a mailbox is created on the remote should it be created also in the local and vice versa?
+Create Both
+
+# To move messages between mailboxes, for further information, see the official guide.
+Expunge Both
+
+# For the following settings, take a look at the official guide.
+SyncState *
+Patterns *
+CopyArrivalDate yes
+Sync All
+#+END_SRC
