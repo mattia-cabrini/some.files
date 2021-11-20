@@ -1,0 +1,170 @@
+#+TITLE: Neomutt Configuration Explained
+
+* Discalaimer
+This *is not* the complete ultimate guide to Neomutt configuration. This file is intended to be an explaination of my personal configuration. Though you might find it useful, if you need a complete guide you may refer to the official [[https://neomutt.org/guide/configuration.html][Neomutt website]].
+
+* Configuration
+
+** IMAP
+*** Online vs Offline
+Neomutt can be configured to access your email by reading an IMAP folder (internet is required). However this is not the case. For my workflow to make sense, I want to be able to read my old emails offline. In order to do that, I had to install an IMAP synchronizer that synchronizes yor IMAP folder to a local directory. I chose [[../../mbsync.org][mbsync (iSync)]].
+
+*** Requirements
+This document explains my configuration assuming mbsync is already configured to sync the IMAP folders i need for a generic number of users.
+
+| Name of the user | Local folder | mbsync channel |
+|------------------+--------------+----------------|
+| user1            | .mail/user1  | user1          |
+| user2            | .mail/user2  | user2          |
+
+*** A basic configuration
+The most basic configuration is the following:
+#+BEGIN_SRC
+set folder = "~/.mail/user"
+
+set spoolfile = "+Inbox"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+#+END_SRC
+
+| Variable  | Value         | What it is                                                         |
+|-----------+---------------+--------------------------------------------------------------------|
+| folder    | \~/.mail/user | The local directory to which the IMAP folder is synced             |
+| spoolfile | +Inbox        | Your inbox mailbox                                                 |
+| record    | +Sent         | Where the sent messages are stored in to eternity                  |
+| trash     | +Trash        | Where the garbage goes                                             |
+| postponed | +Draft        | When you don't have time to finish writing a message, it goes here |
+
+In addition, you will have to configure which mailbox you want neomutt to show:
+#+BEGIN_SRC
+mailboxes =Inbox
+mailboxes =Drafts
+mailboxes =Trash
+mailboxes =Archivio
+mailboxes =Archivio/Altro
+mailboxes =Archivio/Amazon
+mailboxes =Archivio/Banca
+mailboxes =Archivio/Casa
+mailboxes ="Archivio/MIT Newsletter"
+mailboxes =Archivio/Server
+mailboxes =SPAM
+mailboxes =Sent
+mailboxes =Sent/Poli
+mailboxes =Poli
+mailboxes =Poli/Altro
+mailboxes =Poli/Biblio
+mailboxes =Poli/Corsi
+mailboxes =Poli/Corsi/I
+mailboxes =Poli/Corsi/II
+mailboxes =Poli/Corsi/III
+mailboxes =Poli/Esami
+mailboxes =Poli/VClassroom
+#+END_SRc
+
+The previous example is taken directly from my own configuration (it is not committed to this repo, you'll see later why).
+
+** SMPT
+Well indeed we don't want to only *read* the emails, we also want to reply, right? In order to do that, we have to define our SMTP configuration. Here's how:
+#+BEGIN_SRC
+set smtp_url = "smtps://user@example.com@smtps.example.com:465"
+set from = "user@example.com"
+set smtp_pass = "`gpg --decrypt ~/.passwords/user@example.com.gpg 2> /dev/null`"
+set realname = "John Doe"
+#+END_SRC
+
+The realname is the name you'll send your email with. In this exapmle, emails will be sent from =John Doe <user@example.com>=.
+
+Pay attention to the ~smtp_pass~ variable:
+- Clear Text Password:
+  #+BEGIN_SRC
+  smtp_pass = "hey, this is a clear text!"
+  #+BEGIN_SRC
+- Password Command:
+  #+BEGIN_SRC
+  smtp_pass = "`hey, this is a weird kind of command!`"
+  #+BEGIN_SRC
+
+** Sourced Configuration
+The configuration on neomutt is stored in ~\~/.config/neomutt/neomuttrc~. However, if the configuration is too long for a single file, the neomuttrc can include external configuration snippets.
+
+#+BEGIN_SRC
+source /path/to/file
+#+END_SRC
+
+** Multi User Configuration
+I tried to make a multiuser configuration for neomutt but, honestly, I didn't like it. I decided to work around it and make something different. Basically, I made two different configurations for neomutt (one for each user) and I wrote a bash script that override the actual configuration before opening neomutt.
+
+The configuration that you'll find in this repository is like the following:
+#+BEGIN_SRC
+~/.config/neomutt/
++ users
+  - user1.rc
+  - user2.rc
++ mailboxes
+  - user1-mb.rc
+  - user2-mb.rc
+fixed.rc
+neomuttrc
+#+END_SRC
+
+*** The directory ~users~
+Each file in this directory contains the IMAP and SMTP configuration for a user, except for the mailboxes.
+
+*** The directory ~mailboxes~
+Each file in this directory is related to a single user and contains the list of mailboxes for the user.
+
+** Color Scheme and Sidebar
+The file [[./fixed.rc][fixed.rc]] contains various lines to edit the colorscheme and the sidebar of neomutt. Take a look at the code if you are interested.
+
+* Mutli User
+The following is the script that I use to run neomutt:
+
+File ~mutt-boot.sh~:
+#+BEGIN_SRC
+#!/bin/bash
+
+# Current directory
+curdir=$(pwd)
+
+# Cd to neomutt config directory
+cd ~/.config/neomutt
+
+# The parameter $1 is the user I want to work with in neomutt;
+# If it is defined, I override the configuration.
+if [ $# -eq 1 ]; then
+
+    # If a configuration file is defined for the user, alright;
+    # Otherwise the script exits and returns an error (1)
+    if [ -f "./users/$1.rc" ]; then
+        echo "source ./users/$1.rc" > ./neomuttrc
+
+        # If a configuration for the user mailboxes is defined
+        # it is included in the configuration
+        if [ -f "./mailboxes/$1-mb.rc" ]; then
+            echo "source ./mailboxes/$1-mb.rc" >> ./neomuttrc
+        fi
+
+        # The fixed configuration is always included
+        echo "source ./fixed.rc" >> ./neomuttrc
+    else
+        echo "User configuration file not found."
+        exit 1
+    fi
+fi
+
+# If the configuration exists, alright;
+# otherwise the script exists and returns an error.
+# Before and after neomutt, mbsync is called in order to syncronized
+# the IMAP folder before and after.
+if [ -f ./neomuttrc ]; then
+    # -a is my choiche, you might as well specify the actual channel(s)
+    mbsync -a
+    neomutt
+    mbsync -a
+else
+    echo "No configuration found! Try to specify a user."
+fi
+
+cd $curdir
+#+END_SRC
