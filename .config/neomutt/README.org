@@ -1,6 +1,6 @@
 #+TITLE: Neomutt Configuration Explained
 
-* Discalaimer
+* Disclaimer
 This *is not* the complete ultimate guide to Neomutt configuration. This file is intended to be an explaination of my personal configuration. Though you might find it useful, if you need a complete guide you may refer to the official [[https://neomutt.org/guide/configuration.html][Neomutt website]].
 
 * Configuration
