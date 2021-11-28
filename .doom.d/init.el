@@ -146,7 +146,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       org               ; organize your plain life in plain text
+       (org +pretty)               ; organize your plain life in plain text
        php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -191,31 +191,42 @@
  (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
  (add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 ;;(require 'smtpmail)
-(setq user-mail-address "me@mattiacabrini.com"
-      user-full-name  "Mattia Cabrini"
-      mue4e-headers-skip-duplicates  t
-      mu4e-view-show-images t
-      mu4e-view-show-addresses t
-      mu4e-compose-format-flowed nil
-      mu4e-date-format "%y/%m/%d"
-      mu4e-headers-date-format "%Y/%m/%d"
-      mu4e-change-filenames-when-moving t
-      mu4e-attachments-dir "~/Downloads"
-      mu4e-get-mail-command "mbsync personal"
-      mu4e-update-interval  300
-      ;; mu4e-main-buffer-hide-personal-addresses t
-      ;; message-send-mail-function 'smtpmail-send-it
-      ;; starttls-use-gnutls t
-      ;; smtpmail-starttls-credentials '(("smtps.aruba.it" 587 nil nil))
-      mu4e-maildir "~/.mail/personal"
-      mu4e-sent-folder "/Sent"
-      mu4e-drafts-folder "/Drafts"
-      mu4e-trash-folder "/Trash"
-      mu4e-mu-binary "/usr/bin/mu"
-      mu4e-maildir-shortcuts
-      '(("/Inbox"      . ?i)
-        ("/Sent Items" . ?s)
-        ("/Drafts"     . ?d)
-        ("/Trash"      . ?t)))
+;;(setq user-mail-address "me@mattiacabrini.com"
+;;      user-full-name  "Mattia Cabrini"
+;;      mue4e-headers-skip-duplicates  t
+;;      mu4e-view-show-images t
+;;      mu4e-view-show-addresses t
+;;      mu4e-compose-format-flowed nil
+;;      mu4e-date-format "%y/%m/%d"
+;;      mu4e-headers-date-format "%Y/%m/%d"
+;;      mu4e-change-filenames-when-moving t
+;;      mu4e-attachments-dir "~/Downloads"
+;;      mu4e-get-mail-command "mbsync personal"
+;;      mu4e-update-interval  300
+;;      ;; mu4e-main-buffer-hide-personal-addresses t
+;;      ;; message-send-mail-function 'smtpmail-send-it
+;;      ;; starttls-use-gnutls t
+;;      ;; smtpmail-starttls-credentials '(("smtps.aruba.it" 587 nil nil))
+;;      mu4e-maildir "~/.mail/personal"
+;;      mu4e-sent-folder "/Sent"
+;;      mu4e-drafts-folder "/Drafts"
+;;      mu4e-trash-folder "/Trash"
+;;      mu4e-mu-binary "/usr/bin/mu"
+;;      mu4e-maildir-shortcuts
+;;      '(("/Inbox"      . ?i)
+;;        ("/Sent Items" . ?s)
+;;        ("/Drafts"     . ?d)
+;;        ("/Trash"      . ?t)))
+
+(after! org
+  (setq org-directory "~/Documents/org")
+  (setq org-agenda-files (list org-directory))
+  (setq org-todo-keywords '((sequence
+                             "TODO(t)" "PROJ(p)" "STUDY(s)" "WAIT(?)" "HOLD(h)" "TOREAD(r)" "TOWATCH(w)"
+                             "LOOP(l)" "KILL(k)" "NO(n)" "IDEA(i)"
+                             "|" "DONE(d)" "YES(y)" "OKAY(o)" "CANCELLED(c)" "MADE(m)" "READ(R)" "WATCHED(W)" "STUDIED(S)")))
+  ;;(require 'org-bullets)
+  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
+)
