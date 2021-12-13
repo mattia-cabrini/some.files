@@ -1,4 +1,7 @@
 set $console konsole
+set $fm thunar
+set $browser firefox
+set $2nd_browser chromium
 
 # smart_gaps on
 gaps inner 8
@@ -18,9 +21,10 @@ exec --no-startup-id emacs --daemon
 bindsym $mod+Q exec emacsclient -c -a 'emacs'
 bindsym $mod+N exec --no-startup-id emacs --daemon
 
-bindsym $mod+Z exec dolphin
+bindsym $mod+Z exec $fm
 bindsym $mod+X exec $console -e mc
-bindsym $mod+C exec chromium --new-window open.spotify.com
+bindsym $mod+C exec $2nd_browser --new-window open.spotify.com
+bindsym $mod+Shift+F exec $browser
 
 # start dmenu (a program launcher)
 # set $menu --no-startup-id dmenu_run
