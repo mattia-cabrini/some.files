@@ -1,7 +1,7 @@
 # Meta
 set $mod Mod4
 
-set $console konsole
+set $console alacritty
 set $fm dolphin
 set $browser firefox
 set $2nd_browser chromium
