@@ -6,6 +6,7 @@ set $fm dolphin
 set $browser firefox
 set $2nd_browser chromium
 set $ide emacsclient -c -a 'emacs'
+set $ide2 code
 set $music_browser_client --new-window open.spotify.com
 
 # smart_gaps on
@@ -21,9 +22,11 @@ new_window 1pixel
 exec_always --no-startup-id picom --conf ~/.config/picom/picom.conf -bc
 
 exec yakuake
+exec --no-startup-id volumeicon
 
 exec --no-startup-id emacs --daemon
-bindsym $mod+Q exec $ide
+bindsym $mod+I exec $ide
+bindsym $mod+Shift+I exec $ide2
 bindsym $mod+N exec --no-startup-id emacs --daemon
 
 bindsym $mod+Shift+Return exec $fm
@@ -55,7 +58,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -199,7 +202,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec qdbus org.kde.ksmserver /KSMServer logout 1 3 3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -230,9 +234,9 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-		status_command i3status --transparency
-}
+# bar {
+# 		status_command i3status --transparency
+# }
 
 # The following section is taken from <https://github.com/heckelson/i3-and-kde-plasma> and edited
 

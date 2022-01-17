@@ -1,0 +1,41 @@
+# These are the default color for Alacritty on ArcoLinux on i3 (2022-01-26'
+font:
+    size: 10 # custom 
+    normal:
+        family: hack
+        style:  Regular
+    bold:
+        family: hack
+        style:  Bold
+    italic:
+        family: hack
+        style:  Italic
+    bold_italic:
+        family: monospace
+        style:  Bold Italic
+
+color:
+    primary:
+        background: '#222222'
+        foreground: '#f9f9f9'
+
+normal:
+    black:   '#3f3f3f'
+    red:     '#cc0000'
+    green:   '#4e9a06'
+    yellow:  '#c4a000'
+    blue:    '#94bff3'
+    magenta: '#85678f'
+    cyan:    '#06989a'
+    white:   '#dcdccc'
+    
+bright:
+    black:   '#545454'
+    red:     '#fc5454'
+    green:   '#8ae234'
+    yellow:  '#fce94f'
+    blue:    '#94bff3'
+    magenta: '#b294bb'
+    cyan:    '#93e0e3'
+    white:   '#ffffff'
+
