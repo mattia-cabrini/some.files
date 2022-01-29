@@ -262,3 +262,6 @@ for_window [title="Desktop — Plasma"] kill; floating enable; border none
 
 # Zoom (screen sharing problem and floatings)
 for_window [class="zoom"] floating enable
+
+# Picture in Picture
+for_window [title="Picture-in-Picture"] sticky enable
